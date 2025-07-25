@@ -17,6 +17,7 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 driver = webdriver.Chrome(options=options)
 
 try:
+    # ✅ Login
     driver.get("https://www.instagram.com/accounts/login/")
     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.NAME, "username")))
     driver.find_element(By.NAME, "username").send_keys(USERNAME)
