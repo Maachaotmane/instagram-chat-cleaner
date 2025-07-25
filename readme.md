@@ -8,6 +8,8 @@ Automate the process of deleting Instagram direct message chats using Selenium W
 
 - Logs in securely using your Instagram credentials
 - Scrolls through all direct message chats automatically
+- Opens each chat and accesses the conversation info panel
+- Handles dynamic loading and scrolling
 - ...
 
 ---

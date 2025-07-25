@@ -30,5 +30,40 @@ try:
     )
     driver.get("https://www.instagram.com/direct/inbox/")
 
+    # ✅ Function to scroll inside the chat
+    def scroll_all_chats():
+        scroll_box = WebDriverWait(driver, 15).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Chats' and @role='list']"))
+        )
+        last_height = 0
+        while True:
+            driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", scroll_box)
+            delay(1, 2)
+            new_height = driver.execute_script("return arguments[0].scrollTop", scroll_box)
+            if new_height == last_height:
+                break
+            last_height = new_height
+
+    scroll_all_chats()
+
+    # ✅ Loop through chats
+    while True:
+        chats = driver.find_elements(By.XPATH, "//div[@aria-label='Chats']//div[@role='presentation']")
+        if not chats:
+            print("✅ No more chats to delete.")
+            break
+
+        for chat in chats:
+            try:
+                chat.click()
+
+                # We will add it asap
+
+                break
+
+            except Exception as e:
+                print(f"⚠️ Error deleting chat: {e}")
+                break
+
 finally:
     driver.quit()
