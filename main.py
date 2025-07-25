@@ -23,7 +23,12 @@ try:
     driver.find_element(By.NAME, "username").send_keys(USERNAME)
     driver.find_element(By.NAME, "password").send_keys(PASSWORD)
     driver.find_element(By.NAME, "password").send_keys(Keys.ENTER)
-    delay(5, 7)
+
+    # ✅ Go to Inbox
+    WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.XPATH, "//a[contains(@href, '/direct/inbox/')]"))
+    )
+    driver.get("https://www.instagram.com/direct/inbox/")
 
 finally:
     driver.quit()
